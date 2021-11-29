@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class Control : MonoBehaviour
@@ -15,7 +15,7 @@ public class Control : MonoBehaviour
     public float temp = 0;
 
     //private bool isDefended = true;//玩家是否无敌状态
-   // private float defendTimeVal = 0;//玩家无敌时间
+    // private float defendTimeVal = 0;//玩家无敌时间
 
     public GameObject explosionPrefab;//爆炸特效的预制体
     //public GameObject defendPrefab;//保护特效的预制体
@@ -29,6 +29,29 @@ public class Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Input.multiTouchEnabled = true;
+        /*
+        
+        EventTrigger _trigger = btn_up.gameObject.GetComponent<EventTrigger>();
+        EventTrigger.Entry enUpEnter = new EventTrigger.Entry();
+        EventTrigger.Entry enUpExit = new EventTrigger.Entry();
+
+        // 鼠标进入事件 
+        enUpEnter.eventID = EventTriggerType.PointerEnter;
+        // 鼠标滑出事件 
+        enUpExit.eventID = EventTriggerType.PointerExit;
+
+        enUpEnter.callback = new EventTrigger.TriggerEvent();
+        enUpEnter.callback.AddListener(OnMouseEnterUp);
+        _trigger.triggers.Add(enUpEnter);
+        
+
+
+        enUpExit.callback = new EventTrigger.TriggerEvent();
+        enUpExit.callback.AddListener(OnMouseExitUp);
+        _trigger.triggers.Add(enUpExit);
+        */
+
 
     }
 
@@ -74,7 +97,20 @@ public class Control : MonoBehaviour
     {
 
         //right and left 
-        float rl = Input.GetAxisRaw("Horizontal");
+        //float rl = Input.GetAxisRaw("Horizontal");
+        float rl = 0;
+        if (GameObject.Find("Canvas/left").GetComponent<Left_cs>().LeftPress)
+        {
+            rl = -1;
+            if (GameObject.Find("Canvas/left").GetComponent<Left_cs>().LeftExit)
+                rl = 0;
+        }
+        else if ((GameObject.Find("Canvas/right").GetComponent<Right_cs>().rightPress))
+        {
+            rl = 1;
+            if (GameObject.Find("Canvas/right").GetComponent<Right_cs>().rightExit)
+                rl = 0;
+        }
         transform.Translate(Vector3.right * moveSpeed * rl * Time.deltaTime, Space.World);
 
         if (rl < 0)
@@ -95,7 +131,20 @@ public class Control : MonoBehaviour
             return;
 
         //up and down
-        float ud = Input.GetAxisRaw("Vertical");
+        //float ud = Input.GetAxisRaw("Vertical");
+        float ud = 0;
+        if (GameObject.Find("Canvas/up").GetComponent<up_cs>().upPress)
+        {
+            ud = 1;
+            if (GameObject.Find("Canvas/up").GetComponent<up_cs>().upExit)
+                ud = 0;
+        }
+        else if((GameObject.Find("Canvas/down").GetComponent<Down_cs>().downPress))
+        {
+            ud = -1;
+            if (GameObject.Find("Canvas/down").GetComponent<Down_cs>().downExit)
+                ud = 0;
+        }
         transform.Translate(Vector3.up * moveSpeed * ud * Time.deltaTime, Space.World);
 
         if (ud < 0)
@@ -123,11 +172,22 @@ public class Control : MonoBehaviour
     //Tank attack
     private void Attack()
     {
+#if UNITY_STANDALONE_WIN
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuluerAngels));
             temp = 0;
         }
+#else
+        
+        if(GameObject.Find("Canvas/btm_shot").GetComponent<shot_touchcs>().b_shot)
+        {
+            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.eulerAngles + bulletEuluerAngels));
+            temp = 0;
+            GameObject.Find("Canvas/btm_shot").GetComponent<shot_touchcs>().b_shot = false;
+        }
+#endif
+
     }
 
     

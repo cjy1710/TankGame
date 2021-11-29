@@ -103,9 +103,13 @@ MonoBehaviour:
   - {fileID: 21300048, guid: c3a4b3c783ddce7438622efbc82d5538, type: 3}
   - {fileID: 21300016, guid: c3a4b3c783ddce7438622efbc82d5538, type: 3}
   temp: 0
-  explosionPrefab: {fileID: 7690238337192243719, guid: 59b5b3f4a83accc4da1c210f6aafb4dc,
+  btn_up: {fileID: 3281603969028356874, guid: e0e1bf87faf44484bad2bf8e17b17a08, type: 3}
+  btn_down: {fileID: 291775142612864258, guid: 8b4dd4da247825e4d9d551e30cbc3d5d, type: 3}
+  btn_left: {fileID: 1709167181476497620, guid: 4bd9aa0257bfda34e8c1d4a6d7967728,
     type: 3}
-  defendPrefab: {fileID: 7815791935160065910, guid: ce156c3984bdeea4c8538621e4f6bfd2,
+  btn_right: {fileID: 1409234250515103017, guid: bd100f423d34e7747b24646318ebf3ea,
+    type: 3}
+  explosionPrefab: {fileID: 7690238337192243719, guid: 59b5b3f4a83accc4da1c210f6aafb4dc,
     type: 3}
 --- !u!61 &61698489022919702
 BoxCollider2D:

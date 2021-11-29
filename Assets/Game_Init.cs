@@ -44,13 +44,13 @@ public class Game_Init : MonoBehaviour
         CreateItem(item[3], new Vector3(0, 8, 0), Quaternion.identity);
         CreateItem(item[3], new Vector3(10, 8, 0), Quaternion.identity);
 
-        InvokeRepeating("CreateEnemy", 4f, 5f);//延迟调用，第一次4s后随机产生敌人，随后每隔5s产生敌人
+        InvokeRepeating("CreateEnemy", 5f, 10f);//延迟调用，第一次4s后随机产生敌人，随后每隔5s产生敌人
         //实例化老家
         CreateItem(item[0], new Vector3(0, -8, 0), Quaternion.identity);
         CreateItem(item[1], new Vector3(-1, -8, 0), Quaternion.identity);//老家旁边的保护墙
         CreateItem(item[1], new Vector3(1, -8, 0), Quaternion.identity);//老家旁边的保护墙
         CreateItem(item[1], new Vector3(-1, -7, 0), Quaternion.identity);//老家旁边的保护墙
-        CreateItem(item[1], new Vector3(0, -7, 0), Quaternion.identity);//老家旁边的保护墙
+        CreateItem(item[2], new Vector3(0, -7, 0), Quaternion.identity);//老家旁边的保护墙
         CreateItem(item[1], new Vector3(1, -7, 0), Quaternion.identity);//老家旁边的保护墙
         //实例化场景
         for (int i = 0; i < 20; i++)//每个种类产生20个

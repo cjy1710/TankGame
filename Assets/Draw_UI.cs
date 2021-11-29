@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Draw_UI : MonoBehaviour
 {
-    public int PlayerLife = 1;
+    public int PlayerLife = 30;
     public int KillPoint = 0;
     public bool isDead;
     public Text text_life;
@@ -42,7 +42,10 @@ public class Draw_UI : MonoBehaviour
 
         GameObject.Find("Canvas/Text_life").GetComponent<Text>().text = "Life :" + PlayerLife.ToString();
         GameObject.Find("Canvas/Text_score").GetComponent<Text>().text = "Score :" + KillPoint.ToString();
-
+        if(KillPoint == 10)
+        {
+            SceneManager.LoadScene("Congratulation");
+        }
     }
 
     public void Reborn()
